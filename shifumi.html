@@ -11,8 +11,8 @@
     <body>
         <script>
 
-            var userPoints;
-            var computerPoints;
+            var userPoints = 0;
+            var computerPoints = 0;
 
             var getUserChoice = (userInput) => {
                 userInput = prompt("Choisissez entre pierre, feuille et ciseaux:");
@@ -41,9 +41,6 @@
             };
 
             var determineWinner = (userChoice, computerChoice) => {
-                
-                userPoints = 0;
-                computerPoints = 0;
                         
                 if(userChoice === computerChoice){
                     computerPoints++;
@@ -106,14 +103,30 @@
                     if(computerPoints > userPoints){
                         console.log("L'ordinateur gagne par " + computerPoints + " points à " + userPoints);
                     }
-                    else{
+                    else if (userPoints > computerPoints){
                         console.log("Vous gagnez par " + userPoints + " points à " + computerPoints);
+                    }else{
+                        console.log("Vous êtes à égalité : 10 partout!");
                     };
                 };
                    
             };
 
             gamePoints();
+
+            var tryOnce = () =>{
+                var wantToTryOnce = prompt("Voulez-vous rééssayer? Oui ou non?");
+                wantToTryOnce = wantToTryOnce.toLowerCase();
+                if(wantToTryOnce === 'oui'){
+                    var userPoints = 0;
+                    var computerPoints = 0;
+                    gamePoints();
+                }else{
+                    return "Au revoir!";
+                };
+            };
+
+            tryOnce();
 
 
         </script>

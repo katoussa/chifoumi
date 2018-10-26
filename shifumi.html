@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+		<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <title>Jeu du shifumi</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="pierre feuille ciseaux, alias le shifumi" />
+        <meta name="keywords" content="pierre, feuille, ciseaux" />
+    </head>
+    <body>
+        <script>
+
+            var userPoints;
+            var computerPoints;
+
+            var getUserChoice = (userInput) => {
+                userInput = prompt("Choisissez entre pierre, feuille et ciseaux:");
+                userInput = userInput.toLowerCase();
+                if (userInput === 'pierre' || userInput === 'feuille' || userInput === 'ciseaux'){
+                    return userInput;
+                }else{
+                    console.log("Vous devez choisir entre pierre, feuille ou ciseaux.");
+                };
+            };
+
+            var getComputerChoice = () => {
+                var numberChoose = Math.floor(Math.random() * 3);
+                        
+                switch(numberChoose){
+                    case 0:
+                        return 'pierre';
+                        break;
+                    case 1:
+                        return 'feuille';
+                        break;
+                    case 2:
+                        return 'ciseaux';
+                        break;
+                };
+            };
+
+            var determineWinner = (userChoice, computerChoice) => {
+                
+                userPoints = 0;
+                computerPoints = 0;
+                        
+                if(userChoice === computerChoice){
+                    computerPoints++;
+                    userPoints++;
+                    return "Vous êtes à égalité!";
+                }
+
+                if(userChoice === 'pierre'){
+                    if(computerChoice === 'feuille'){
+                        computerPoints++;
+                        userPoints = userPoints;
+                        return "L'ordinateur vous a battu!";
+                    }else{
+                        userPoints++;
+                        computerPoints = computerPoints;
+                        return "Vous gagnez!";
+                    };
+                }else if(userChoice === 'feuille'){
+                    if(computerChoice === 'ciseaux'){
+                        computerPoints++;
+                        userPoints = userPoints;
+                        return "L'ordinateur vous a battu!";
+                    }else{
+                        userPoints++;
+                        computerPoints = computerPoints;
+                        return "Vous gagnez!";
+                    };
+                }else{
+                    if(computerChoice === 'pierre'){
+                        computerPoints++;
+                        userPoints = userPoints;
+                        return "L'ordinateur vous a battu!";
+                    }else{
+                        userPoints++;
+                        computerPoints = computerPoints;
+                        return "Vous gagnez!";
+                    };
+                };
+                        
+
+            };
+
+            var playGame = () =>{
+                var userChoice = getUserChoice();
+                var computerChoice = getComputerChoice();
+                console.log("Vous avez choisi " + userChoice + " et l'ordinateur a choisi " + computerChoice + ".");
+                console.log(determineWinner(userChoice, computerChoice));
+                console.log("vous avez " + userPoints + " points.");
+                console.log("l'ordinateur a " + computerPoints + " points.");
+            };
+
+
+            var gamePoints = () => {
+                do{
+                    playGame();
+
+                }while(userPoints < 10 && computerPoints < 10);
+
+                if (userPoints === 10 || computerPoints === 10) {
+                    if(computerPoints > userPoints){
+                        console.log("L'ordinateur gagne par " + computerPoints + " points à " + userPoints);
+                    }
+                    else{
+                        console.log("Vous gagnez par " + userPoints + " points à " + computerPoints);
+                    };
+                };
+                   
+            };
+
+            gamePoints();
+
+
+        </script>
+    </body>
+</html>
